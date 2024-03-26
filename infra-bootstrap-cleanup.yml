@@ -73,6 +73,11 @@
   hosts: controller
   tags: always
   tasks:
+    - name: Clean up application credential
+      when: cifmw_bootstrap_create_application_credential | bool
+      ansible.builtin.include_role:
+        name: bootstrap
+        tasks_from: application-credential-cleanup
     - name: Run tasks/cleanup_networking.yml instead of 'main'
       ansible.builtin.include_role:
         name: bootstrap

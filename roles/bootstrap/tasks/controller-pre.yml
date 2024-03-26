@@ -86,6 +86,10 @@
   loop:
     - openstack.cloud
 
+- name: Replace cloud config with new application credential
+  when: cifmw_bootstrap_create_application_credential | bool
+  ansible.builtin.include_tasks: application-credential.yml
+
 - name: Copy in_zuul playbooks
   ansible.builtin.copy:
     src: "{{ item }}"
